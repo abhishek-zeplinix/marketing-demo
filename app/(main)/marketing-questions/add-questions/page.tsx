@@ -58,7 +58,7 @@ const TemplateQuestionPage = () => {
 
         // If in edit mode, find the specific question to edit
         if (isEditMode && marketingTemplateQuestionId) {
-            const questionToEdit = savedTemplateQuestions.find((question) => question.id === marketingTemplateQuestionId);
+            const questionToEdit = savedTemplateQuestions.find((question: { id: string; }) => question.id === marketingTemplateQuestionId);
 
             if (questionToEdit) {
                 setForm(questionToEdit);
@@ -74,7 +74,7 @@ const TemplateQuestionPage = () => {
 
             if (isEditMode) {
                 // Update existing question
-                const updatedQuestions = existingQuestions.map((question) => (question.id === marketingTemplateQuestionId ? { ...form, id: marketingTemplateQuestionId } : question));
+                const updatedQuestions = existingQuestions.map((question: { id: string | null; }) => (question.id === marketingTemplateQuestionId ? { ...form, id: marketingTemplateQuestionId } : question));
                 localStorage.setItem('marketingTemplateQuestions', JSON.stringify(updatedQuestions));
             } else {
                 // Add new question with a unique ID
@@ -93,7 +93,7 @@ const TemplateQuestionPage = () => {
         }
     };
 
-    const onInputChange = (name, val) => {
+    const onInputChange = (name: string, val: string) => {
         setForm((prevForm) => ({
             ...prevForm,
             [name]: val
